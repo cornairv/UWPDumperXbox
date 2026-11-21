@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "UWPDumperXbox": {
+      "commandName": "Project",
+      "commandLineArgs": "UWPDumperTest out"
+    }
+  }
+}

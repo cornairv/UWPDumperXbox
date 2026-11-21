@@ -1,0 +1,13 @@
+<Solution>
+  <Configurations>
+    <Platform Name="Any CPU" />
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="RemoteCall/RemoteCall.vcxproj" Id="3a76d2ee-ac34-4d8f-8f7f-4bcb8f7d4199" />
+  <Project Path="TestProgram/TestProgram.vcxproj" Id="d2257c6b-fbfa-4808-85c5-44b44883bb87" />
+  <Project Path="UploadServer/UploadServer.csproj" Id="f83e4991-5a2f-4edc-ab68-154483286553" />
+  <Project Path="UWPDumperXbox/UWPDumperXbox.csproj">
+    <BuildDependency Project="RemoteCall/RemoteCall.vcxproj" />
+  </Project>
+</Solution>

@@ -1,0 +1,30 @@
+﻿<Project DefaultTargets="UWPDumperXbox">
+	<UsingTask
+		TaskName="UWPDumperXbox"
+		TaskFactory="RoslynCodeTaskFactory"
+		AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.Core.dll">
+		<ParameterGroup>
+			<TargetName ParameterType="System.String" Required="true" />
+			<Destination ParameterType="System.String" Required="true" />
+			<Overwrite ParameterType="System.Boolean" />
+			<OverrideSource ParameterType="System.String" />
+			<OverridePid ParameterType="System.UInt32" />
+		</ParameterGroup>
+		<Task>
+			<Code Type="Class" Language="cs">
+				<![CDATA[
+// {{code}}
+				]]>
+			</Code>
+		</Task>
+	</UsingTask>
+
+	<Target Name="UWPDumperXbox">
+		<UWPDumperXbox
+			TargetName="$(TargetName)"
+			Destination="$(Destination)"
+			Overwrite="$(Overwrite)"
+			OverrideSource="$(OverrideSource)"
+			OverridePid="$(OverridePid)" />
+	</Target>
+</Project>

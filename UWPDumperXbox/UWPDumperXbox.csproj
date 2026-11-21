@@ -1,0 +1,33 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<OutputType>Exe</OutputType>
+		<TargetFramework>netstandard2.0</TargetFramework>
+		<LangVersion>10.0</LangVersion>
+		<Platforms>AnyCPU</Platforms>
+		<DisableFastUpToDateCheck>true</DisableFastUpToDateCheck>
+		<VcxprojOutDir>$(SolutionDir)x64\$(Configuration)\</VcxprojOutDir>
+	</PropertyGroup>
+
+	<Target Name="BuildXML" BeforeTargets="Build" Condition="'$(DesignTimeBuild)' != 'true'" Inputs="UWPDumperXbox.template.cs;UWPDumperXbox.template.xml;pre_build.ps1;$(VcxprojOutDir)RemoteCall.txt" Outputs="$(IntermediateOutputPath)UWPDumperXbox.cs">
+		
+		<Exec Command="powershell.exe -NoProfile -ExecutionPolicy Bypass -File &quot;$(ProjectDir)pre_build.ps1&quot; -ProjectDir &quot;$(ProjectDir).&quot; -CodeBytesPath &quot;$(VcxprojOutDir)RemoteCall.txt&quot; -CodeOutputPath &quot;$(IntermediateOutputPath)UWPDumperXbox.cs&quot; -XmlOutputPath &quot;$(TargetDir)UWPDumperXbox.xml&quot;" />
+
+	</Target>
+
+	<Target Name="ReplaceTemplate" BeforeTargets="CoreCompile" Condition="'$(DesignTimeBuild)' != 'true'" DependsOnTargets="BuildXML">
+
+		<ItemGroup>
+			<Compile Remove="UWPDumperXbox.template.cs" />
+			<Compile Include="$(IntermediateOutputPath)UWPDumperXbox.cs" />
+		</ItemGroup>
+
+	</Target>
+
+	<ItemGroup>
+	  <None Update="global.json">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
+	</ItemGroup>
+
+</Project>
